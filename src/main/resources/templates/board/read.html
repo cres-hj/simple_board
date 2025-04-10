@@ -24,18 +24,18 @@
         <form action="/board/update" enctype="multipart/form-data" method="post">
           <tr>
             <td class="table_left">번호:</td>
-            <input name="bno" th:value="${board.bno}" type="hidden">
-            <td th:text="${board.bno}"></td>
+            <input name="bno" th:value="${map.board.bno}" type="hidden">
+            <td th:text="${map.board.bno}"></td>
           </tr>
           <tr>
             <td class="table_left">작성일:</td>
-            <td th:text="${board.writeTime}"></td>
+            <td th:text="${map.board.writeTime}"></td>
           </tr>
           <tr>
             <td class="table_left">제목:</td>
             <td>
               <div class="mb-3 mt-3">
-              <input class="form-control" id="title" name="title" required th:value="${board.title}" type="text">
+              <input class="form-control" id="title" name="title" required th:value="${map.board.title}" type="text">
               </div>
             </td>
           </tr>
@@ -43,8 +43,8 @@
             <td class="table_left" colspan="2">
               <div class="mb-3 mt-3">
               <label class="form-label" for="summernote">내용: </label>
-              <input name="bno" th:value="${board.bno}" type="hidden">
-              <textarea id="summernote" name="content" required rows="10" th:utext="${board.content}" ></textarea>
+              <input name="bno" th:value="${map.board.bno}" type="hidden">
+              <textarea id="summernote" name="content" required rows="10" th:utext="${map.board.content}" ></textarea>
               </div>
             </td>
           </tr>
@@ -66,13 +66,19 @@
                 <input class="form-control" name="password" placeholder="삭제를 위한 비밀번호" required type="password">
               </div>
               <div class="mb-3 mt-3">
-                <input name="bno" th:value="${board.bno}" type="hidden">
+                <input name="bno" th:value="${map.board.bno}" type="hidden">
                 <button class="btn btn-outline-danger">삭제하기</button>
               </div>
             </td>
           </tr>
         </form>
         </tbody>
+      </table>
+      <table>
+        <tr th:each="c:${map.comments}">
+          <td th:text="${c.nickname}"></td>
+          <td th:text="${c.content}"></td>
+        </tr>
       </table>
 
 </section>
