@@ -5,6 +5,8 @@ import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
 
+import java.util.*;
+
 @Controller
 public class BoardController {
   @Autowired
@@ -12,7 +14,8 @@ public class BoardController {
 
   @GetMapping("/board/list")
   public ModelAndView list() {
-    return new ModelAndView("board/list").addObject("boards", boardService.findAll());
+    List<Board> boards = boardService.findAll();
+    return new ModelAndView("board/list").addObject("boards", boards);
   }
 
   @GetMapping("/board/write")
@@ -23,8 +26,8 @@ public class BoardController {
   @GetMapping("/board/read")
   public ModelAndView read(@RequestParam Integer bno) {
     // 읽을 게시글이 있어야 하니까 board도 넘겨야지
-    Board board = boardService.findByBno(bno);
-    return new ModelAndView("board/read").addObject("board", board);
+    Map<String, Object> map = boardService.findByBno(bno);
+    return new ModelAndView("board/read").addObject("map", map);
   }
 
   @PostMapping("/board/write")
